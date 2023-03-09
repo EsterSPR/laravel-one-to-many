@@ -11,7 +11,7 @@ use App\Models\Type;
 class Project extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['project_title', 'cover_img','slug','project_desk','type_id'];
 
     public static function generateSLug($title){
         return Str::slug($title, '-');
