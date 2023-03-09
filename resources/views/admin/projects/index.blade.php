@@ -3,10 +3,10 @@
 @section('content')
 {{-- card template --}}
 
-<div class="row row-cols-1 row-cols-md-3 g-4 p-5">
+<div class="row row-cols-1 row-cols-md-3 g-4 p-5 m-0">
   @forelse ($projects as $item)
   <div class="col">
-    <div class="card">    
+    <div class="card h-100">    
 
       <div class="card-img-top">
         <img src="{{ $item['cover_img'] }}" class="img-fluid rounded-top" alt="{{ $item['project_title'] }}">
