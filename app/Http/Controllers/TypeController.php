@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Type;
+use App\Models\Project;
+
 use Illuminate\Http\Request;
 use Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
@@ -15,7 +19,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all();
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -36,7 +41,11 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $newType = $request->validated();
+        // $slug = Type::generateSlug($request->name);
+        // $newType['slug'] = $slug;
+        // Type::create($newType);
+        // return redirect()->route('admin.types.index');
     }
 
     /**
@@ -47,7 +56,8 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        $projects = Project::all();
+        return view('admin.projects.show', compact('type','projects'));
     }
 
     /**
@@ -70,7 +80,11 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        // $newType = $request->validated();
+        // $slug = Type::generateSlug($request->name);
+        // $newType['slug'] = $slug;
+        // $type->update($newType);
+        // return redirect()->route('admin.types.index');
     }
 
     /**
@@ -81,6 +95,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        // $type->delete();
+        // return redirect()->route('admin.types.index');
     }
 }

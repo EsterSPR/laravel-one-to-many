@@ -40,6 +40,20 @@
 
             <div class="form-group mb-3">
                 <label class="control-label mb-2">
+                    Project type
+                </label>
+                <select type="text" class="form-control es_yellowborder" placeholder="Type" id="type_id" name="type_id">
+                    @foreach($types as $type)
+                        <option value="{{ $type->id }}"> {{ $type->name }} </option>
+                    @endforeach
+                </select>
+                @error('type_id')
+                    <div class="alert alert-danger mt-2">{{$message}}</div>
+                @enderror
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label mb-2">
                     Project description
                 </label>
                 <textarea name="project_desc" id="project_desc" placeholder="Project description" class="w-100 es_yellowborder rounded p-2"></textarea>

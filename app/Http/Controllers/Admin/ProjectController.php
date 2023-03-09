@@ -6,8 +6,12 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Project;
+use App\Models\Type;
+
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -29,7 +33,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -65,6 +70,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $types = Type::all();
+
         return view('admin.projects.edit', compact('project'));
     }
 
@@ -77,7 +84,19 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $form_data = $request->validated();
+
+        $slug = Project::generateSlug($request->project_title, '-');
+        
+        $form_data['slug'] = $slug;
+        
+        $project->update($form_data);
+
+
+        // if($request->has('casts')){
+        //     $movie->casts()->sync($request->casts);
+        // }
+        return redirect()->route('admin.projects.index');
     }
 
     /**
